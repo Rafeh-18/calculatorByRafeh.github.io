@@ -17,7 +17,7 @@ let ans="";
 function appendNumber(number) {
     //let currentNumber= document.getElementById("resultat").textContent;
     
-    if(operator=="" ){
+    if(operator=="" && ans===""){
         firstNumber+=number;
         console.log(firstNumber);
         
@@ -27,13 +27,13 @@ function appendNumber(number) {
     if(operator!="" && ans==="")
     {
         secondNumber+=number;
+        
     }
     document.getElementById("resultat").textContent+=operator+secondNumber;
     console.log(secondNumber);
     
    if(ans!=""){
     firstNumber=ans;
-    //operator="";
     secondNumber+=number;
     document.getElementById("resultat").textContent=firstNumber+operator+secondNumber;
    }
@@ -59,7 +59,66 @@ function calculateResult() {
     }
     document.getElementById("resultat").textContent=res;
     operator="";
+    firstNumber=""
     secondNumber="";
     ans=res;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// Attach click event listeners to the number buttons
+document.querySelectorAll(".number").forEach(function (button) {
+    button.addEventListener("click", function () {
+        appendNumber(button.textContent);
+    });
+});
+
+
+
+
+
+// Attach click event listener to the equals button
+document.querySelector("#equal").addEventListener("click", function () {
+    calculateResult();
+});
+
+
+
+
+
+//Function to handle operator button clicks
+function appendOperator(op) {
+    operator=op;
+    document.getElementById("resultat").textContent+=op;
+}
+
+
+//Attach click event listeners to the operator buttons
+document.querySelectorAll(".operator").forEach(function (button) {
+    button.addEventListener("click", function () {
+        appendOperator(button.textContent);
+    });
+});
+
+
+
+function clear(){
+    document.getElementById("resultat").textContent="0";
+    firstNumber="";
+    secondNumber="";
+    operator="";
+    ans="";
+}
+document.querySelector("#clear").addEventListener("click", function () {
+    clear();
+});
